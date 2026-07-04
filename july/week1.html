@@ -84,6 +84,8 @@
         .popup-task-title { font-size: 17px; font-weight: 600; color: #1a1a1a; margin-bottom: 20px; line-height: 1.5; }
         .popup-img-wrap { width: 100%; border-radius: 16px; overflow: hidden; background: #f4f4f4; min-height: 200px; display: flex; align-items: center; justify-content: center; }
         .popup-img-wrap img { width: 100%; height: auto; display: block; border-radius: 16px; }
+        .popup-img-wrap.multiple-images { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 10px; overflow-x: auto; overflow-y: hidden; padding-bottom: 6px; scroll-behavior: smooth; }
+        .popup-img-wrap.multiple-images img { flex: 0 0 auto; width: auto; max-width: 220px; max-height: 220px; object-fit: contain; margin-bottom: 0; }
         .popup-no-img { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 50px 30px; color: var(--gray); font-size: 14px; text-align: center; }
         .popup-no-img svg { width: 50px; height: 50px; fill: #555; }
         .popup-hint { margin-top: 14px; font-size: 12px; color: #444; font-family: monospace; background: #f7f7f7; padding: 10px 14px; border-radius: 10px; border-left: 3px solid var(--primary); line-height: 1.7; }
@@ -405,10 +407,25 @@
                 popupTitle.textContent = titleText;
                 
                 if (imagePath && imagePath.trim() !== '') {
-                    const paths = imagePath.split(',').map(p => resolvePath(p));
-                    popupImgWrap.innerHTML = paths.map(p => `<img src="${p}" alt="${titleText}" style="max-width:100%;margin-bottom:10px;">`).join('');
-                    popupHint.textContent = `Image path: ${paths[0]}`;
+                    const paths = imagePath.split(',').map(p => resolvePath(p)).filter(p => p && p.trim() !== '');
+                    if (paths.length > 1) {
+                        popupImgWrap.className = 'popup-img-wrap multiple-images';
+                        popupImgWrap.innerHTML = paths.map(p => `<img src="${p}" alt="${titleText}" style="max-width:100%;">`).join('');
+                    } else if (paths.length === 1) {
+                        popupImgWrap.className = 'popup-img-wrap';
+                        popupImgWrap.innerHTML = `<img src="${paths[0]}" alt="${titleText}" style="max-width:100%;">`;
+                    } else {
+                        popupImgWrap.className = 'popup-img-wrap';
+                        popupImgWrap.innerHTML = `
+                            <div class="popup-no-img">
+                                <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+                                <span>No image attached</span>
+                            </div>
+                        `;
+                    }
+                    popupHint.textContent = `Image path: ${paths[0] || ''}`;
                 } else {
+                    popupImgWrap.className = 'popup-img-wrap';
                     popupImgWrap.innerHTML = `
                         <div class="popup-no-img">
                             <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
