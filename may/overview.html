@@ -24,10 +24,11 @@
         .month-btn:hover { background: rgba(252, 180, 21, 0.1); border-color: var(--primary); color: #fff; }
         .month-btn.active { background: var(--primary); color: #1a1a1a; border-color: var(--primary); font-weight: 600; }
         .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
-        .stat-card { background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(252, 180, 21, 0.15); border-radius: 16px; padding: 25px; text-align: center; transition: all 0.3s ease; }
+        .stat-card { background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(252, 180, 21, 0.15); border-radius: 16px; padding: 25px; text-align: left; transition: all 0.3s ease; }
         .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 40px rgba(252, 180, 21, 0.15); }
-        .stat-number { font-size: 42px; font-weight: 700; color: var(--primary); margin-bottom: 8px; font-family: 'Playfair Display', serif; }
-        .stat-label { font-size: 13px; color: rgba(0, 0, 0, 0.6); text-transform: uppercase; letter-spacing: 1px; }
+        .card-heading { font-size: 13px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 14px; }
+        .card-items-list { display: flex; flex-direction: column; gap: 8px; }
+        .card-item-text { font-size: 14px; font-weight: 500; color: rgba(0, 0, 0, 0.85); line-height: 1.4; }
         .table-section { margin-top: 20px; }
         .table-title { font-size: 20px; font-weight: 600; color: var(--primary); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1.5px; }
         .overview-table { width: 100%; border-collapse: collapse; background: rgba(0, 0, 0, 0.02); border-radius: 16px; overflow: hidden; }
@@ -53,21 +54,29 @@
             <h1 class="page-title">May 2026</h1>
         </div>
         <div class="overview-card">
-            <div class="month-selector">
-                <button class="month-btn active">May 2026</button>
-            </div>
             <div class="stats-row">
                 <div class="stat-card">
-                    <div class="stat-number">4</div>
-                    <div class="stat-label">Weeks Completed</div>
+                    <div class="card-heading">MAJOR PROJECTS</div>
+                    <div class="card-items-list">
+                        <div class="card-item-text">ELGi Blog Series</div>
+                        <div class="card-item-text">E-book Layout Design</div>
+                        <div class="card-item-text">Flipbooks Publication</div>
+                    </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">9</div>
-                    <div class="stat-label">Working Days</div>
+                    <div class="card-heading">CREATIVE CAMPAIGNS</div>
+                    <div class="card-items-list">
+                        <div class="card-item-text">Off-page Articles</div>
+                        <div class="card-item-text">Content Marketing Campaign</div>
+                        <div class="card-item-text">Social Media Content</div>
+                    </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">18</div>
-                    <div class="stat-label">Total Tasks</div>
+                    <div class="card-heading">BRANDING & DESIGN</div>
+                    <div class="card-items-list">
+                        <div class="card-item-text">Document Design System</div>
+                        <div class="card-item-text">Visual Collateral Formatting</div>
+                    </div>
                 </div>
             </div>
             <div class="table-section">

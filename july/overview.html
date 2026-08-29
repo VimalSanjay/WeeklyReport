@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monthly Overview - Weekly Report</title>
+    <title>Monthly Overview - July 2026</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,10 +19,6 @@
         .page-subtitle { font-size: 14px; letter-spacing: 4px; text-transform: uppercase; color: var(--primary); font-weight: 500; }
         .overview-card { width: 100%; max-width: 900px; background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(252, 180, 21, 0.15); border-radius: 24px; padding: 40px; backdrop-filter: blur(10px); animation: scaleIn 0.8s ease-out; }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .month-selector { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
-        .month-btn { padding: 12px 30px; background: rgba(0, 0, 0, 0.04); border: 1px solid rgba(252, 180, 21, 0.2); border-radius: 30px; color: rgba(0, 0, 0, 0.7); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
-        .month-btn:hover { background: rgba(252, 180, 21, 0.1); border-color: var(--primary); color: #fff; }
-        .month-btn.active { background: var(--primary); color: #1a1a1a; border-color: var(--primary); font-weight: 600; }
         .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px; }
         .stat-card { background: rgba(0, 0, 0, 0.03); border: 1px solid rgba(252, 180, 21, 0.15); border-radius: 16px; padding: 25px; text-align: left; transition: all 0.3s ease; }
         .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 40px rgba(252, 180, 21, 0.15); }
@@ -38,164 +34,149 @@
         .overview-table td { padding: 18px 24px; color: rgba(0, 0, 0, 0.75); font-size: 15px; border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
         .overview-table tr:last-child td { border-bottom: none; }
         .overview-table tr:hover td { background: rgba(252, 180, 21, 0.08); }
-        .status-complete { color: #4ade80; font-weight: 500; }
-        .status-progress { color: var(--primary); font-weight: 500; }
         .task-count { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; background: rgba(252, 180, 21, 0.15); border-radius: 10px; font-weight: 600; color: var(--primary); }
         .total-row { background: rgba(252, 180, 21, 0.12) !important; }
         .total-row td { color: #000000 !important; font-weight: 700; }
         .week-link { color: var(--primary); text-decoration: none; font-weight: 600; transition: all 0.3s ease; }
-        .week-link:hover { color: #fff; text-decoration: underline; }
+        .week-link:hover { color: var(--primary-dark); text-decoration: underline; }
         .footer { margin-top: 50px; font-size: 12px; color: rgba(0, 0, 0, 0.4); letter-spacing: 1px; }
         @media (max-width: 1024px) { .stats-row { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) { .page-title { font-size: 32px; } .stats-row { grid-template-columns: 1fr; } .overview-table th, .overview-table td { padding: 14px 16px; font-size: 13px; } .month-selector { flex-wrap: wrap; } }
+        @media (max-width: 768px) { .page-title { font-size: 32px; } .stats-row { grid-template-columns: 1fr; } .overview-table th, .overview-table td { padding: 14px 16px; font-size: 13px; } }
     </style>
 </head>
 <body>
-    <a href="month.html" class="back-btn">← Back to Home</a>
+    <a href="month.html" class="back-btn">← Back to July</a>
     <div class="container">
         <div class="page-header">
             <p class="page-subtitle">Monthly Overview</p>
-            <h1 class="page-title">April 2026</h1>
+            <h1 class="page-title">July 2026</h1>
         </div>
         <div class="overview-card">
             <div class="stats-row">
                 <div class="stat-card">
                     <div class="card-heading">MAJOR PROJECTS</div>
                     <div class="card-items-list">
-                        <div class="card-item-text">Off-Page Articles Series</div>
-                        <div class="card-item-text">Blog Banners Suite</div>
+                        <div class="card-item-text">ELGi Newsletter (10 Pages)</div>
+                        <div class="card-item-text">Office Wall Branding</div>
+                        <div class="card-item-text">Aurae Pitch Deck & Profile</div>
+                        <div class="card-item-text">Smart Garage Application</div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="card-heading">CREATIVE CAMPAIGNS</div>
                     <div class="card-items-list">
-                        <div class="card-item-text">Festive Greetings Suite</div>
-                        <div class="card-item-text">Campaign Graphics</div>
+                        <div class="card-item-text">ELGi Festive Greetings</div>
+                        <div class="card-item-text">OS2 Campaign Reels</div>
+                        <div class="card-item-text">OS Care AI Video Campaign</div>
+                        <div class="card-item-text">Meta Ad & Happy Client Posts</div>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="card-heading">BRANDING & DESIGN</div>
                     <div class="card-items-list">
-                        <div class="card-item-text">Flip-book Publication</div>
-                        <div class="card-item-text">Visual Collateral Assets</div>
+                        <div class="card-item-text">Smart Garage Logo</div>
+                        <div class="card-item-text">OS Plot Pro Logo</div>
+                        <div class="card-item-text">OS Care Logo Redesign</div>
+                        <div class="card-item-text">Mizuha Packaging Label</div>
                     </div>
                 </div>
             </div>
+
+            <!-- Weekly Summary Table -->
             <div class="table-section">
-                <h3 class="table-title">Weekly Breakdown</h3>
+                <h3 class="table-title">Weekly Summary</h3>
                 <table class="overview-table">
                     <thead>
                         <tr>
                             <th>Week</th>
-                            <th>Period</th>
-                            <th>Working Days</th>
-                            <th>Tasks Completed</th>
-                            <th>Status</th>
+                            <th>Date Range</th>
+                            <th>Key Works & Deliverables</th>
                             <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Week 1</strong></td>
-                            <td>Mar 30 – Apr 03</td>
-                            <td>3 days</td>
-                            <td><span class="task-count">4</span></td>
-                            <td><span class="status-complete">✓ Complete</span></td>
+                            <td>01 – 03 July</td>
+                            <td>PDF Portfolio completed; Aurae Campaign Posts 6, 7 & 4; OS Care and OS2 application logos designed.</td>
                             <td><a href="week1.html" class="week-link">View Slides →</a></td>
                         </tr>
                         <tr>
                             <td><strong>Week 2</strong></td>
-                            <td>Apr 06 – Apr 10</td>
-                            <td>5 days</td>
-                            <td><span class="task-count">6</span></td>
-                            <td><span class="status-complete">✓ Complete</span></td>
+                            <td>06 – 10 July</td>
+                            <td>Raw Origins 50g pack design; Aurae pitch deck; OS Care branding and video production initiated.</td>
                             <td><a href="week2.html" class="week-link">View Slides →</a></td>
                         </tr>
                         <tr>
                             <td><strong>Week 3</strong></td>
-                            <td>Apr 13 – Apr 17</td>
-                            <td>4 days</td>
-                            <td><span class="task-count">5</span></td>
-                            <td><span class="status-complete">✓ Complete</span></td>
+                            <td>13 – 17 July</td>
+                            <td>OS Care logo redesigned & 12 AI videos generated; Aurae office branding & service wall; ELGi expo invitations.</td>
                             <td><a href="week3.html" class="week-link">View Slides →</a></td>
                         </tr>
                         <tr>
                             <td><strong>Week 4</strong></td>
-                            <td>Apr 20 – Apr 24</td>
-                            <td>4 days</td>
-                            <td><span class="task-count">5</span></td>
-                            <td><span class="status-complete">✓ Complete</span></td>
+                            <td>20 – 24 July</td>
+                            <td>Smart Garage logo completed & 2 promotional reels created; 5 office wall designs completed; OS Plot Pro logo; 4 OS2 reels; ELGi Singapore National Day greeting.</td>
                             <td><a href="week4.html" class="week-link">View Slides →</a></td>
                         </tr>
+                        <tr>
+                            <td><strong>Week 5</strong></td>
+                            <td>27 – 31 July</td>
+                            <td>ELGi Newsletter, 10 pages completed; Mizuha can design updated; ELGi festive greetings for Independence Day, Onam, and Raksha Bandhan completed.</td>
+                            <td><a href="week5.html" class="week-link">View Slides →</a></td>
+                        </tr>
                         <tr class="total-row">
-                            <td colspan="3"><strong>Total</strong></td>
-                            <td><span class="task-count">20</span></td>
-                            <td>—</td>
+                            <td><strong>Total</strong></td>
+                            <td><strong>20 - 31 July (Main Focus)</strong></td>
+                            <td><strong>5 Weeks Completed</strong></td>
                             <td>—</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            <!-- Major Accomplishments / Key Projects -->
             <div class="table-section" style="margin-top: 40px;">
-                <h3 class="table-title">Task Type Summary</h3>
+                <h3 class="table-title">Project Breakdown</h3>
                 <table class="overview-table">
                     <thead>
                         <tr>
-                            <th>Task Type</th>
-                            <th>Week 1</th>
-                            <th>Week 2</th>
-                            <th>Week 3</th>
-                            <th>Week 4</th>
-                            <th>Total</th>
+                            <th>Project / Client</th>
+                            <th>Major Achievements</th>
+                            <th>Deliverables</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Off-Page Articles</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>3</td>
-                            <td>-</td>
-                            <td><span class="task-count">10</span></td>
+                            <td><strong>ELGi</strong></td>
+                            <td>10-page Newsletter completed & submitted; Festive greetings for Singapore National Day, Independence Day, Onam, and Raksha Bandhan.</td>
+                            <td><span class="task-count">15</span></td>
                         </tr>
                         <tr>
-                            <td>Blog Banners</td>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td>4</td>
-                            <td><span class="task-count">9</span></td>
+                            <td><strong>Smart Garage & OS Care</strong></td>
+                            <td>Smart Garage logo completed with 3 promotional reels; OS Care logo redesigned with 12 AI campaign videos.</td>
+                            <td><span class="task-count">17</span></td>
                         </tr>
                         <tr>
-                            <td>Flip-book</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>1</td>
-                            <td><span class="task-count">1</span></td>
-                        </tr>
-                        <tr>
-                            <td>Festive Greetings</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>3</td>
-                            <td>2</td>
+                            <td><strong>Office Interior Branding</strong></td>
+                            <td>5 office wall designs completed (including top-window design) for Aurae office space.</td>
                             <td><span class="task-count">5</span></td>
                         </tr>
-                       
-                        <tr class="total-row">
-                            <td><strong>Total Tasks</strong></td>
-                            <td><strong>4</strong></td>
-                            <td><strong>6</strong></td>
-                            <td><strong>5+3</strong></td>
-                            <td><strong>5+2</strong></td>
-                            <td><span class="task-count">20+5</span></td>
+                        <tr>
+                            <td><strong>OS2 & OS Plot Pro</strong></td>
+                            <td>OS Plot Pro logo completed (2 versions); 4 promotional reels & Campaign Reel 1 & 2 completed; Carousel Post 1.</td>
+                            <td><span class="task-count">8</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mizuha, Aurae & PB</strong></td>
+                            <td>Mizuha tin can label design updated & completed; Aurae Pitch Deck; Happy Client post template & Post 2.</td>
+                            <td><span class="task-count">6</span></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="footer">Vimal Sanjay Weekly report</div>
+        <div class="footer">Aurae Solutions // July 2026 Overview</div>
     </div>
 </body>
 </html>
