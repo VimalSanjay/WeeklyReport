@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 - Weekly Report</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #fcb415;
+            --primary-dark: #e09f00;
+            --secondary: #ffffff;
+            --light: #1a1a1a;
+            --gray: #6f6f6f;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f7f7f7;
+            color: var(--light);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 25% 25%, rgba(252, 180, 21, 0.05) 0%, transparent 45%), radial-gradient(circle at 75% 75%, rgba(252, 180, 21, 0.05) 0%, transparent 45%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100px);
+            padding: 40px 40px 140px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 600;
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        .overview-slide {
+            background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.07;
+            animation: floatShape 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: #ffffff;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            bottom: 10%;
+            left: 5%;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 40%;
+            right: 10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(90deg); }
+            50% { transform: translate(0, -40px) rotate(180deg); }
+            75% { transform: translate(-20px, -20px) rotate(270deg); }
+        }
+
+        .overview-container {
+            max-width: 1100px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease-out;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            z-index: 2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header Block */
+        .overview-header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1px solid rgba(252, 180, 21, 0.3);
+            border-radius: 40px;
+            padding: 8px 18px;
+            box-shadow: 0 4px 15px rgba(252, 180, 21, 0.15);
+        }
+
+        .brand-badge img {
+            width: 42px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .brand-badge span {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--primary-dark);
+        }
+
+        .wfh-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #1a1a1a;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(252, 180, 21, 0.3);
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 4vw, 50px);
+            font-weight: 700;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .overview-subtitle {
+            font-size: 15px;
+            color: var(--gray);
+            font-weight: 400;
+            max-width: 650px;
+        }
+
+        /* Quantities / Deliverables Highlights Bar */
+        .metrics-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .metric-card {
+            background: #ffffff;
+            border: 1px solid rgba(252, 180, 21, 0.22);
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), 0 0 15px rgba(252, 180, 21, 0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px rgba(252, 180, 21, 0.18);
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+        }
+
+        .metric-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .metric-sub {
+            font-size: 11px;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        /* Activities Grid (4 Categories) */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+
+        .category-card {
+            background: #ffffff;
+            border: 1px solid rgba(252, 180, 21, 0.2);
+            border-radius: 18px;
+            padding: 24px 26px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(252, 180, 21, 0.45);
+            box-shadow: 0 14px 35px rgba(252, 180, 21, 0.12);
+        }
+
+        .category-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .category-header-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(252, 180, 21, 0.3);
+        }
+
+        .category-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: #1a1a1a;
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .category-pill {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(252, 180, 21, 0.12);
+            color: var(--primary-dark);
+            border: 1px solid rgba(252, 180, 21, 0.25);
+        }
+
+        .activities-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(250, 250, 250, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #333333;
+        }
+
+        .bullet-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .activity-text strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .deliverable-highlight {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, rgba(252, 180, 21, 0.12), rgba(255, 255, 255, 0.8));
+            border: 1px solid rgba(252, 180, 21, 0.3);
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .deliverable-highlight .label {
+            font-weight: 600;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .deliverable-highlight .qty {
+            font-weight: 700;
+            color: #1a1a1a;
+            background: var(--primary);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+        }
+
+        /* Footer & Badge */
+        .overview-footer {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            padding-top: 10px;
+        }
+
+        .employee-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            background: #ffffff;
+            border: 1px solid rgba(252, 180, 21, 0.25);
+            border-radius: 30px;
+            font-size: 13px;
+            color: #444;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        .employee-pill strong {
+            color: #1a1a1a;
+        }
+
+        .employee-pill .dot {
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .footer-banner {
+            display: inline-block;
+            background: var(--primary);
+            color: #1a1a1a;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 6px 20px rgba(252, 180, 21, 0.3);
+        }
+
+        .client-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .client-tag {
+            padding: 5px 12px;
+            background: rgba(252, 180, 21, 0.12);
+            border: 1px solid rgba(252, 180, 21, 0.3);
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .premium-accent {
+            position: fixed;
+            width: 1px;
+            height: 40%;
+            background: linear-gradient(180deg, rgba(252, 180, 21, 0.5), transparent);
+            left: 5%;
+            top: 20%;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .premium-accent::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary), transparent);
+            left: -1.5px;
+            opacity: 0.3;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 12px 24px;
+            background: var(--primary);
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            border-radius: 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(252, 180, 21, 0.3);
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(252, 180, 21, 0.5);
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #fff, var(--primary));
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(252, 180, 21, 0.2);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(252, 180, 21, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .nav-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #1a1a1a;
+        }
+
+        .slide-indicators {
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+            border-radius: 50%;
+            transform: scale(1.2);
+        }
+
+        .slide-counter {
+            font-size: 14px;
+            color: var(--gray);
+            min-width: 50px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .keyboard-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 12px;
+            color: var(--gray);
+            opacity: 0.85;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        @media (max-width: 1024px) {
+            .metrics-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .slide {
+                padding: 40px 24px 140px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .metrics-row {
+                grid-template-columns: 1fr;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .nav-controls {
+                padding: 10px 20px;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="month.html" class="back-btn">← Back to November</a>
+    <div class="premium-accent"></div>
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="presentation">
+        <!-- SINGLE WEEKLY OVERVIEW SLIDE -->
+        <div class="slide overview-slide active" data-slide="0">
+            <div class="slide-number">1 / 1</div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+
+            <div class="overview-container">
+                <!-- Header Block -->
+                <header class="overview-header">
+                    <div class="brand-badge">
+                        <img src="../june/assets/os2 logo.png" alt="OS2 Logo" />
+                        <span>OS2 Studio</span>
+                    </div>
+                    <div class="wfh-tag">WORK FROM HOME</div>
+                    <h1 class="main-title">WEEK 2 — BLOCK CLOSURE WEEK</h1>
+                    <p class="overview-subtitle">
+                        Consolidated summary of upskilling achievements, creative studio deliverables, event design suites, and recruitment development.
+                    </p>
+                </header>
+
+                <!-- Key Metrics & Quantities Highlights -->
+                <div class="metrics-row">
+                    <div class="metric-card">
+                        <div class="metric-num">1</div>
+                        <div class="metric-label">Course Completed</div>
+                        <div class="metric-sub">LinkedIn Learning Preview</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-num">2</div>
+                        <div class="metric-label">Promo Reels</div>
+                        <div class="metric-sub">OS2 Studio Motion Video</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-num">8</div>
+                        <div class="metric-label">Design Versions</div>
+                        <div class="metric-sub">5 Welcome + 3 Backdrop</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-num">1</div>
+                        <div class="metric-label">Test File Set</div>
+                        <div class="metric-sub">Recruitment Development</div>
+                    </div>
+                </div>
+
+                <!-- 4 Activity Categories Organized Neatly -->
+                <div class="categories-grid">
+                    <!-- Category 1: Upskilling & Learning -->
+                    <div class="category-card">
+                        <div>
+                            <div class="category-top">
+                                <div class="category-header-wrap">
+                                    <div class="category-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                                        </svg>
+                                    </div>
+                                    <h2 class="category-title">Upskilling & Learning</h2>
+                                </div>
+                                <span class="category-pill">Education</span>
+                            </div>
+                            <ul class="activities-list">
+                                <li class="activity-item">
+                                    <span class="bullet-dot"></span>
+                                    <div class="activity-text">
+                                        Completed the LinkedIn Learning course: <strong>"Preview Branding Guidelines 101: Where Design Meets Marketing"</strong>.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="deliverable-highlight">
+                            <span class="label">Completed Deliverable</span>
+                            <span class="qty">1 Course Completed</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 2: OS2 Studio -->
+                    <div class="category-card">
+                        <div>
+                            <div class="category-top">
+                                <div class="category-header-wrap">
+                                    <div class="category-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/>
+                                        </svg>
+                                    </div>
+                                    <h2 class="category-title">OS2 Studio</h2>
+                                </div>
+                                <span class="category-pill">Motion & Video</span>
+                            </div>
+                            <ul class="activities-list">
+                                <li class="activity-item">
+                                    <span class="bullet-dot"></span>
+                                    <div class="activity-text">
+                                        <strong>OS2 promotional reels 2 completed</strong>, refined, and submitted for brand showcase.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="deliverable-highlight">
+                            <span class="label">Completed Deliverables</span>
+                            <span class="qty">2 Promotional Reels</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 3: Adriana — First Holy Communion -->
+                    <div class="category-card">
+                        <div>
+                            <div class="category-top">
+                                <div class="category-header-wrap">
+                                    <div class="category-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.86L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/>
+                                        </svg>
+                                    </div>
+                                    <h2 class="category-title">Adriana — First Holy Communion</h2>
+                                </div>
+                                <span class="category-pill">Event Design Suite</span>
+                            </div>
+                            <ul class="activities-list">
+                                <li class="activity-item">
+                                    <span class="bullet-dot"></span>
+                                    <div class="activity-text">
+                                        <strong>Welcome board:</strong> 5 design versions completed with custom typography and layout variations.
+                                    </div>
+                                </li>
+                                <li class="activity-item">
+                                    <span class="bullet-dot"></span>
+                                    <div class="activity-text">
+                                        <strong>Backdrop:</strong> 3 design versions completed tailored for stage visual presence.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="deliverable-highlight">
+                            <span class="label">Completed Deliverables</span>
+                            <span class="qty">8 Design Versions (5 Welcome + 3 Backdrop)</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 4: Recruitment & Design Development -->
+                    <div class="category-card">
+                        <div>
+                            <div class="category-top">
+                                <div class="category-header-wrap">
+                                    <div class="category-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                                        </svg>
+                                    </div>
+                                    <h2 class="category-title">Recruitment & Design Development</h2>
+                                </div>
+                                <span class="category-pill">Operations</span>
+                            </div>
+                            <ul class="activities-list">
+                                <li class="activity-item">
+                                    <span class="bullet-dot"></span>
+                                    <div class="activity-text">
+                                        <strong>Graphic Designer test file set developed</strong> for standardized technical assessment and candidate evaluation.
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="deliverable-highlight">
+                            <span class="label">Completed Deliverable</span>
+                            <span class="qty">1 Test File Set</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Summary Details -->
+                <footer class="overview-footer">
+                    <div class="client-tags">
+                        <span class="client-tag">LinkedIn Learning</span>
+                        <span class="client-tag">OS2 Studio</span>
+                        <span class="client-tag">Adriana Communion</span>
+                        <span class="client-tag">Recruitment Framework</span>
+                    </div>
+
+                    <div class="employee-pill">
+                        <strong>Vimal Sanjay A</strong>
+                        <span class="dot">•</span>
+                        <span>Graphic Designer Intern</span>
+                        <span class="dot">•</span>
+                        <span>OS2-IN26-002</span>
+                    </div>
+
+                    <div class="footer-banner">
+                        Block Closure Deliverables: Professional Branding Course, 2 Promotional Reels, 8 Communion Designs & Assessment Suite
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" disabled><svg viewBox="0 0 24 24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg></button>
+        <div class="slide-indicators" id="indicators">
+            <div class="indicator active"></div>
+        </div>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">1</span></span>
+        <button class="nav-btn" id="nextBtn" disabled><svg viewBox="0 0 24 24">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+            </svg></button>
+    </div>
+    <div class="keyboard-hint">Single Weekly Overview Slide</div>
+
+    <script>
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.style.width = '100%';
+        }
+    </script>
+</body>
+
+</html>
